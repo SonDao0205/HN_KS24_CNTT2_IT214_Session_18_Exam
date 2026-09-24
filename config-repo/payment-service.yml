@@ -1,0 +1,21 @@
+server:
+  port: 8083
+
+spring:
+  datasource:
+    url: ${PAYMENT_DB_URL:jdbc:mysql://localhost:3306/shopmart_payment?createDatabaseIfNotExist=true}
+    username: ${DB_USERNAME:root}
+    password: ${DB_PASSWORD:123456}
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: false
+  kafka:
+    consumer:
+      group-id: payment-service-group
+      properties:
+        spring.json.value.default.type: com.shopmart.payment.event.OrderEvent
+
+payment:
+  simulate-failure: ${PAYMENT_SIMULATE_FAILURE:false}
+  max-amount: ${PAYMENT_MAX_AMOUNT:80000000}

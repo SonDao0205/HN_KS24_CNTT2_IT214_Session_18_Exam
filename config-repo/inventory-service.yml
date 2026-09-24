@@ -1,0 +1,21 @@
+server:
+  port: 8082
+
+spring:
+  datasource:
+    url: ${INVENTORY_DB_URL:jdbc:mysql://localhost:3306/shopmart_inventory?createDatabaseIfNotExist=true}
+    username: ${DB_USERNAME:root}
+    password: ${DB_PASSWORD:123456}
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: false
+    defer-datasource-initialization: true
+  sql:
+    init:
+      mode: always
+  kafka:
+    consumer:
+      group-id: inventory-service-group
+      properties:
+        spring.json.value.default.type: com.shopmart.inventory.event.OrderEvent

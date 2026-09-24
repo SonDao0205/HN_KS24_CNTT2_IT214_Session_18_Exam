@@ -1,0 +1,17 @@
+server:
+  port: 8081
+
+spring:
+  datasource:
+    url: ${ORDER_DB_URL:jdbc:mysql://localhost:3306/shopmart_order?createDatabaseIfNotExist=true}
+    username: ${DB_USERNAME:root}
+    password: ${DB_PASSWORD:123456}
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: false
+  kafka:
+    consumer:
+      group-id: order-service-group
+      properties:
+        spring.json.value.default.type: com.shopmart.order.event.OrderEvent
